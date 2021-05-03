@@ -1,0 +1,10 @@
+include LICENSE
+include README.md
+
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+
+recursive-include kontrasto *.json
+recursive-include kontrasto *.typed
+
+recursive-include stubs *.pyi

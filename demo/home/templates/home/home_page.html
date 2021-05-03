@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+{% load kontrasto_tags %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+    <h1>{{ page.title }}</h1>
+
+    {{ page.test_image|dominant_color }}
+
+    {% wcag_2_contrast_light_or_dark page.test_image "#ffffff" "#000000" as result %}
+
+    <br>
+
+    {{ page.test_image|wcag_3_contrast:"#ffffff" }}
+
+    {{ page.body|richtext }}
+
+    <div class="kontrasto--{{ result.bg_theme }}" style="--kontrasto-text:{{ result.text_color }}; --kontrasto-bg:{{ result.bg_color }}99; display: grid; max-width: 640px;">
+      {% image page.test_image width-800 style="grid-column:1; grid-row: 1; width: 100%; height: auto;" %}
+      <p style="grid-column:1; grid-row: 1; align-self: start; justify-self: start; color:var(--kontrasto-text); font-size: 1.5rem; padding: 1rem;"><span style="background:var(--kontrasto-bg);">This is test text</span></p>
+      <p style="grid-column:1; grid-row: 1; align-self: center; justify-self: start; color:var(--kontrasto-text); font-size: 1.5rem; padding: 1rem;"><span style="background:var(--kontrasto-bg);">This is test text</span></p>
+      <p style="grid-column:1; grid-row: 1; align-self: end; justify-self: start; color:var(--kontrasto-text); font-size: 1.5rem; padding: 1rem;"><span style="background:var(--kontrasto-bg);">This is test text</span></p>
+      <p style="grid-column:1; grid-row: 1; align-self: start; justify-self: center; color:var(--kontrasto-text); font-size: 1.5rem; padding: 1rem;"><span style="background:var(--kontrasto-bg);">This is test text</span></p>
+      <p style="grid-column:1; grid-row: 1; align-self: center; justify-self: center; color:var(--kontrasto-text); font-size: 1.5rem; padding: 1rem;"><span style="background:var(--kontrasto-bg);">This is test text</span></p>
+      <p style="grid-column:1; grid-row: 1; align-self: end; justify-self: center; color:var(--kontrasto-text); font-size: 1.5rem; padding: 1rem;"><span style="background:var(--kontrasto-bg);">This is test text</span></p>
+      <p style="grid-column:1; grid-row: 1; align-self: start; justify-self: end; color:var(--kontrasto-text); font-size: 1.5rem; padding: 1rem;"><span style="background:var(--kontrasto-bg);">This is test text</span></p>
+      <p style="grid-column:1; grid-row: 1; align-self: center; justify-self: end; color:var(--kontrasto-text); font-size: 1.5rem; padding: 1rem;"><span style="background:var(--kontrasto-bg);">This is test text</span></p>
+      <p style="grid-column:1; grid-row: 1; align-self: end; justify-self: end; color:var(--kontrasto-text); font-size: 1.5rem; padding: 1rem;"><span style="background:var(--kontrasto-bg);">This is test text</span></p>
+    </div>
+{% endblock %}

@@ -1,0 +1,64 @@
+{
+  extends: ["config:base"],
+  // https://renovatebot.com/docs/configuration-options/#commitbodytable
+  commitBodyTable: true,
+  // https://renovatebot.com/docs/configuration-options/#ignoredeps
+  ignoreDeps: [],
+  // https://renovatebot.com/docs/configuration-options/#labels
+  labels: ["enhancement"],
+  // https://renovatebot.com/docs/configuration-options/#prcreation
+  prCreation: "not-pending",
+  // https://renovatebot.com/docs/configuration-options/#semanticcommits
+  semanticCommits: true,
+  // https://renovatebot.com/docs/configuration-options/#prbodycolumns
+  prBodyColumns: ["Package", "Update", "Type", "Change"],
+  // https://renovatebot.com/docs/configuration-options/#rebasestaleprs
+  rebaseStalePrs: true,
+  // https://renovatebot.com/docs/configuration-options/#schedule
+  schedule: ["every weekend"],
+  node: {
+    major: {
+      enabled: true,
+    },
+    // https://renovatebot.com/docs/node/#configuring-support-policy
+    supportPolicy: ["current"],
+  },
+  packageRules: [
+    {
+      packageNames: ["prettier"],
+      groupName: "prettier",
+      automerge: true,
+      automergeType: "branch",
+    },
+    {
+      packageNames: ["black"],
+      groupName: "black",
+      automerge: true,
+      automergeType: "branch",
+    },
+    {
+      packageNames: ["flake8"],
+      groupName: "flake8",
+      automerge: true,
+      automergeType: "branch",
+    },
+    {
+      packageNames: ["mypy"],
+      groupName: "mypy",
+      automerge: true,
+      automergeType: "branch",
+    },
+    {
+      packageNames: ["pytest"],
+      groupName: "pytest",
+      automerge: true,
+      automergeType: "branch",
+    },
+    {
+      packageNames: ["coverage"],
+      groupName: "coverage",
+      automerge: true,
+      automergeType: "branch",
+    },
+  ],
+}

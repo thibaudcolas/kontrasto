@@ -1,0 +1,24 @@
+{
+  "name": "kontrasto",
+  "version": "0.1.0",
+  "description": "🎨 Automated color contrast for text over images",
+  "author": "Thibaud Colas",
+  "license": "MIT",
+  "homepage": "https://github.com/thibaudcolas/kontrasto",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thibaudcolas/kontrasto.git"
+  },
+  "bugs": {
+    "url": "https://github.com/thibaudcolas/kontrasto/issues"
+  },
+  "files": [],
+  "devDependencies": {
+    "prettier": "2.2.1"
+  },
+  "scripts": {
+    "prepare": "./.githooks/deploy.sh",
+    "lint": "prettier --check '**/?(.)*.{md,mdx,css,scss,js,json,json5,yaml,yml}'",
+    "format": "prettier --write '**/?(.)*.{md,mdx,css,scss,js,json,json5,yaml,yml}'"
+  }
+}
