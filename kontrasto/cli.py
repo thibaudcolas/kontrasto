@@ -81,6 +81,7 @@ def main() -> None:
             wcag_2.white_frac, dominant_hex
         )
 
+        contrast_2_text = False
         if args.text:
             contrast_2_text = wcag_2.wcag2_contrast(args.text, dominant_hex)
 

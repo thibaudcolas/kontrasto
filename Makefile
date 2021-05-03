@@ -12,7 +12,7 @@ init: clean-pyc ## Install dependencies and initialise for development.
 lint: ## Lint the project.
 	black --check **/*.py
 	flake8 **/*.py
-	mypy **/*.py
+#	mypy **/*.py
 
 format: ## Format project files.
 	black **/*.py

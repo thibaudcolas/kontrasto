@@ -4,6 +4,7 @@ from typing import Iterable
 from .convert import to_rgb
 from .lookup_table import get_apca_font_styles
 
+
 # Python port of: https://github.com/Myndex/SAPC-APCA/blob/master/JS/APCAonly.98e_d12e.js
 def apca_contrast(background, text):
     if isinstance(background, str):
@@ -23,7 +24,7 @@ def apca_contrast(background, text):
     # // Essentially, 2.4 best models actual display
     # // characteristics in combination with the total method
 
-    mainTRCencode = 0.41666666666666666667  # = 1.0/mainTRC;
+    # mainTRCencode = 0.41666666666666666667  # = 1.0/mainTRC;
 
     Rco = 0.2126729  # sRGB Red Coefficient (from matrix)
     Gco = 0.7151522  # sRGB Green Coefficient (from matrix)
