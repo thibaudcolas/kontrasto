@@ -24,6 +24,7 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # Application definition
 
 INSTALLED_APPS = [
+    "django_vite",
     "demo.home",
     "kontrasto",
     "wagtail.contrib.forms",
@@ -133,8 +134,11 @@ STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 ]
 
+DJANGO_VITE_ASSETS_PATH = os.path.join(PROJECT_DIR, "static_vite")
+
 STATICFILES_DIRS = [
     os.path.join(PROJECT_DIR, "static"),
+    DJANGO_VITE_ASSETS_PATH,
 ]
 
 # ManifestStaticFilesStorage is recommended in production, to prevent outdated
@@ -166,6 +170,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+DJANGO_VITE_DEV_MODE = True
+DJANGO_VITE_MANIFEST_PATH = os.path.join(DJANGO_VITE_ASSETS_PATH, "manifest.json")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "x*@ouu6*vj*i!_-6x*@_yklrs5f4swz2(x*+dlzdaf7@7go_d-"
