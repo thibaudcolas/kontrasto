@@ -11,7 +11,6 @@
 
     {{ page.test_image|dominant_color }}
 
-    {% wcag_2_contrast_light_or_dark page.test_image "#ffffff" "#000000" as result %}
 
     <br>
 
@@ -19,16 +18,57 @@
 
     {{ page.body|richtext }}
 
-    <div class="kontrasto--{{ result.bg_theme }}" style="--kontrasto-text:{{ result.text_color }}; --kontrasto-bg:{{ result.bg_color }}99; display: grid; max-width: 640px;">
-      {% image page.test_image width-800 style="grid-column:1; grid-row: 1; width: 100%; height: auto;" %}
-      <p style="grid-column:1; grid-row: 1; align-self: start; justify-self: start; color:var(--kontrasto-text); font-size: 1.5rem; padding: 1rem;"><span style="background:var(--kontrasto-bg);">This is test text</span></p>
-      <p style="grid-column:1; grid-row: 1; align-self: center; justify-self: start; color:var(--kontrasto-text); font-size: 1.5rem; padding: 1rem;"><span style="background:var(--kontrasto-bg);">This is test text</span></p>
-      <p style="grid-column:1; grid-row: 1; align-self: end; justify-self: start; color:var(--kontrasto-text); font-size: 1.5rem; padding: 1rem;"><span style="background:var(--kontrasto-bg);">This is test text</span></p>
-      <p style="grid-column:1; grid-row: 1; align-self: start; justify-self: center; color:var(--kontrasto-text); font-size: 1.5rem; padding: 1rem;"><span style="background:var(--kontrasto-bg);">This is test text</span></p>
-      <p style="grid-column:1; grid-row: 1; align-self: center; justify-self: center; color:var(--kontrasto-text); font-size: 1.5rem; padding: 1rem;"><span style="background:var(--kontrasto-bg);">This is test text</span></p>
-      <p style="grid-column:1; grid-row: 1; align-self: end; justify-self: center; color:var(--kontrasto-text); font-size: 1.5rem; padding: 1rem;"><span style="background:var(--kontrasto-bg);">This is test text</span></p>
-      <p style="grid-column:1; grid-row: 1; align-self: start; justify-self: end; color:var(--kontrasto-text); font-size: 1.5rem; padding: 1rem;"><span style="background:var(--kontrasto-bg);">This is test text</span></p>
-      <p style="grid-column:1; grid-row: 1; align-self: center; justify-self: end; color:var(--kontrasto-text); font-size: 1.5rem; padding: 1rem;"><span style="background:var(--kontrasto-bg);">This is test text</span></p>
-      <p style="grid-column:1; grid-row: 1; align-self: end; justify-self: end; color:var(--kontrasto-text); font-size: 1.5rem; padding: 1rem;"><span style="background:var(--kontrasto-bg);">This is test text</span></p>
-    </div>
+    {% with demo_text="Kontrasto" %}
+      <label for="test_image_text">
+        <span>Image overlay text</span>
+        <input type="text" id="test_image_text" value="{{ demo_text }}">
+      </label>
+
+      {% wcag_2_contrast_light_or_dark page.test_image "#ffffff" "#000000" as result %}
+      {% wcag_3_contrast_light_or_dark page.test_image "#ffffff" "#000000" as result_3 %}
+      <div style="--kontrasto-text:{{ result.text_color }}; --kontrasto-bg:{{ result.bg_color }}99; display: grid; min-width: 300px; width: 75vw;">
+        {% image page.test_image width-800 style="grid-column:1; grid-row: 1; width: 100%; height: auto;" %}
+        <div class="grid-1 grid grid-cols-3 grid-rows-3 gap-4 p-4 text-xl">
+          {% with ''|center:9 as range %}
+            {% for _ in range %}
+              <div class="grid justify-center content-center">
+                <p>
+                  <span class="kontrasto-text-bg" data-kontrasto-text><span data-demo-text>{{ demo_text }}</span></span>
+                  <span class="kontrasto-text-bg" style="--kontrasto-text:{{ result_3.text_color }}; --kontrasto-bg:{{ result_3.bg_color }}99;" data-kontrasto-text><span data-demo-text>{{ demo_text }}</span></span>
+                </p>
+                <p>
+                  <span class="kontrasto-text-bg" data-kontrasto-text data-client-only><span data-demo-text>{{ demo_text }}</span></span>
+                  <span class="kontrasto-text-bg" data-kontrasto-text data-client-only data-wcag-next><span data-demo-text>{{ demo_text }}</span></span>
+                </p>
+              </div>
+            {% endfor %}
+          {% endwith %}
+        </div>
+      </div>
+
+    {% for item in page.gallery_items.all %}
+    {% wcag_2_contrast_light_or_dark item.image "#ffffff" "#000000" as result %}
+    {% wcag_3_contrast_light_or_dark item.image "#ffffff" "#000000" as result_3 %}
+      <div class="kontrasto--{{ result.bg_theme }}" style="--kontrasto-text:{{ result.text_color }}; --kontrasto-bg:{{ result.bg_color }}99; display: grid; min-width: 300px; width: 75vw;">
+        {% image item.image width-800 style="grid-column:1; grid-row: 1; width: 100%; height: auto;" %}
+        <div class="grid-1 grid grid-cols-3 grid-rows-3 gap-4 p-4 text-xl">
+          {% with ''|center:9 as range %}
+            {% for _ in range %}
+              <div class="grid justify-center content-center">
+                <p>
+                  <span class="kontrasto-text-bg" data-kontrasto-text><span data-demo-text>{{ demo_text }}</span></span>
+                  <span class="kontrasto-text-bg" style="--kontrasto-text:{{ result_3.text_color }}; --kontrasto-bg:{{ result_3.bg_color }}99;" data-kontrasto-text><span data-demo-text>{{ demo_text }}</span></span>
+                </p>
+                <p>
+                  <span class="kontrasto-text-bg" data-kontrasto-text data-client-only><span data-demo-text>{{ demo_text }}</span></span>
+                  <span class="kontrasto-text-bg" data-kontrasto-text data-client-only data-wcag-next><span data-demo-text>{{ demo_text }}</span></span>
+                </p>
+              </div>
+            {% endfor %}
+          {% endwith %}
+        </div>
+      </div>
+    {% endfor %}
+
+    {% endwith %}
 {% endblock %}

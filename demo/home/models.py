@@ -1,12 +1,19 @@
 from django.db import models
 
-from wagtail.core.models import Page
+from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import RichTextField
-from wagtail.admin.edit_handlers import FieldPanel
-from wagtail.images.models import AbstractImage, AbstractRendition, Image, SourceImageIOError
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel
+from wagtail.images.models import (
+    AbstractImage,
+    AbstractRendition,
+    Image,
+    SourceImageIOError,
+)
 from wagtail.images.edit_handlers import ImageChooserPanel
 
 from kontrasto.willow_operations import pillow_dominant
+
+from modelcluster.fields import ParentalKey
 
 # https://docs.wagtail.io/en/stable/advanced_topics/images/custom_image_model.html
 
@@ -35,7 +42,7 @@ class CustomImage(AbstractImage):
                     # storage being used.
                     raise SourceImageIOError(str(e))
 
-                self.save(update_fields=['dominant_color'])
+                self.save(update_fields=["dominant_color"])
 
         return self.dominant_color
 
@@ -52,14 +59,32 @@ class Rendition(AbstractRendition):
 class HomePage(Page):
     body = RichTextField(blank=True)
     test_image = models.ForeignKey(
-        'home.CustomImage',
+        "home.CustomImage",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name='+'
+        related_name="+",
     )
 
     content_panels = Page.content_panels + [
-        FieldPanel('body', classname="full"),
-        ImageChooserPanel('test_image'),
+        FieldPanel("body", classname="full"),
+        ImageChooserPanel("test_image"),
+        InlinePanel("gallery_items", label="Gallery items"),
+    ]
+
+
+class HomePageGalleryItem(Orderable):
+    page = ParentalKey(
+        HomePage, on_delete=models.CASCADE, related_name="gallery_items"
+    )
+    image = models.ForeignKey(
+        "home.CustomImage",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+
+    panels = [
+        ImageChooserPanel("image"),
     ]
