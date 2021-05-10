@@ -14,7 +14,7 @@ export default ({ command, mode }) => {
         outDir: "dist",
         manifest: false,
         lib: {
-          entry: path.resolve(__dirname, "kontrasto/static/kontrasto.ts"),
+          entry: path.resolve(__dirname, "kontrasto/js/kontrasto.ts"),
           name: "kontrasto",
         },
       },
