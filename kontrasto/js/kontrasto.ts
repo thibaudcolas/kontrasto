@@ -3,15 +3,29 @@ import { wcag2_contrast } from "./wcag_2";
 import { APCAcontrast } from "./wcag_3";
 import { rgbToHex } from "./convert";
 
+interface KontrastoResult {
+  text_color: string;
+  text_theme: "light" | "dark";
+  bg_color: string;
+  bg_theme: "light" | "dark";
+}
+
+interface KontrastoTarget {
+  minX?: number;
+  maxX?: number;
+  minY?: number;
+  maxY?: number;
+}
+
 export const wcag_2_contrast_light_or_dark = (
   image: HTMLImageElement,
   light_color: string,
   dark_color: string,
   elt: HTMLElement = null,
-) => {
+): KontrastoResult => {
   const colorThief = new ColorThief();
   let filterFunction = null;
-  let target: any = {};
+  const target: KontrastoTarget = {};
   if (elt) {
     const imageRect = image.getBoundingClientRect();
     const eltRect = elt.getBoundingClientRect();
@@ -51,10 +65,10 @@ export const wcag_3_contrast_light_or_dark = (
   light_color: string,
   dark_color: string,
   elt: HTMLElement = null,
-) => {
+): KontrastoResult => {
   const colorThief = new ColorThief();
   let filterFunction = null;
-  let target: any = {};
+  const target: KontrastoTarget = {};
   if (elt) {
     const imageRect = image.getBoundingClientRect();
     const eltRect = elt.getBoundingClientRect();

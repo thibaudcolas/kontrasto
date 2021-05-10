@@ -93,8 +93,7 @@ lib64
 # -------------------------------------------------
 
 # Generated files
-static_vite
-/static
+static
 .cache-loader
 
 *.local

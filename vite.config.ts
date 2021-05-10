@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import path from "path";
 
-export default ({ command, mode }) => {
+export default defineConfig(({ mode }) => {
   const baseConfig = {
     base: "/static/",
     root: "",
@@ -24,7 +24,7 @@ export default ({ command, mode }) => {
   return {
     ...baseConfig,
     build: {
-      outDir: "demo/static_vite",
+      outDir: "demo/static",
       manifest: true,
       rollupOptions: {
         input: {
@@ -33,4 +33,4 @@ export default ({ command, mode }) => {
       },
     },
   };
-};
+});

@@ -13,7 +13,7 @@ const bc = 0.0722;
 // low-gamma adjust coefficient
 const lowc = 1 / 12.92;
 
-function adjustGamma(_) {
+function adjustGamma(_: number): number {
   return Math.pow((_ + 0.055) / 1.055, 2.4);
 }
 
@@ -26,7 +26,7 @@ function adjustGamma(_) {
  * var luminance = require('relative-luminance');
  * var black_lum = luminance([0, 0, 0]); // 0
  */
-export function relativeLuminance(rgb) {
+export function relativeLuminance(rgb: [number, number, number]): number {
   const rsrgb = rgb[0] / 255;
   const gsrgb = rgb[1] / 255;
   const bsrgb = rgb[2] / 255;
@@ -42,9 +42,9 @@ export function relativeLuminance(rgb) {
  * See https://github.com/tmcw/wcag-contrast/blob/11c1a9036a716ef0cb553c8f805b64b9945eb50b/index.js.
  */
 
-const hexChars = "a-f\\d";
-const match3or4Hex = `#?[${hexChars}]{3}[${hexChars}]?`;
-const match6or8Hex = `#?[${hexChars}]{6}([${hexChars}]{2})?`;
+// const hexChars = "a-f\\d";
+// const match3or4Hex = `#?[${hexChars}]{3}[${hexChars}]?`;
+// const match6or8Hex = `#?[${hexChars}]{6}([${hexChars}]{2})?`;
 
 function hexRgb(hex: string) {
   hex = hex.replace(/^#/, "");
@@ -82,7 +82,7 @@ function hexRgb(hex: string) {
  * @example
  * luminance(1, 1); // = 1
  */
-export function luminance(a, b) {
+export function luminance(a: number, b: number): number {
   const l1 = Math.max(a, b);
   const l2 = Math.min(a, b);
   return (l1 + 0.05) / (l2 + 0.05);
@@ -96,7 +96,10 @@ export function luminance(a, b) {
  * @example
  * rgb([0, 0, 0], [255, 255, 255]); // = 21
  */
-export function rgb(a, b) {
+export function rgb(
+  a: [number, number, number],
+  b: [number, number, number],
+): number {
   return luminance(relativeLuminance(a), relativeLuminance(b));
 }
 
@@ -108,7 +111,7 @@ export function rgb(a, b) {
  * @example
  * hex('#000', '#fff'); // = 21
  */
-export function hex(a: string, b: string) {
+export function hex(a: string, b: string): number {
   return rgb(hexRgb(a), hexRgb(b));
 }
 
@@ -119,7 +122,7 @@ export function hex(a: string, b: string) {
  * @example
  * score(10); // = 'AAA'
  */
-export function score(contrast) {
+export function score(contrast: number): "AAA" | "AA" | "AA Large" | "Fail" {
   if (contrast >= 7) {
     return "AAA";
   }

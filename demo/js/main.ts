@@ -8,8 +8,10 @@ import {
 
 import "./style.css";
 
-const images = [].slice.call(document.querySelectorAll("img"));
-const demoText = [].slice.call(document.querySelectorAll("[data-demo-text]"));
+const images = [...document.querySelectorAll<HTMLImageElement>("img")];
+const demoText = [
+  ...document.querySelectorAll<HTMLElement>("[data-demo-text]"),
+];
 const test_image_text = document.querySelector<HTMLInputElement>(
   "#test_image_text",
 );
@@ -23,23 +25,26 @@ declare global {
   }
 }
 
-const applyContrastBackground = () => {
-  images.forEach((img) => {
-    const testElt = [].slice.call(
-      img.closest("div").querySelectorAll("[data-client-only]"),
-    );
+const applyContrastBackgroundImage = (img: HTMLImageElement) => {
+  const testElt = [
+    ...img.closest("div").querySelectorAll<HTMLElement>("[data-client-only]"),
+  ];
 
-    testElt.forEach((elt) => {
-      let result;
-      if (elt.hasAttribute("data-wcag-next")) {
-        result = wcag_3_contrast_light_or_dark(img, "#ffffff", "#000000", elt);
-      } else {
-        result = wcag_2_contrast_light_or_dark(img, "#ffffff", "#000000", elt);
-      }
-      // console.log(elt.getBoundingClientRect(), img.getBoundingClientRect());
-      elt.style.setProperty("--kontrasto-bg", `${result.bg_color}99`);
-      elt.style.setProperty("--kontrasto-text", result.text_color);
-    });
+  testElt.forEach((elt) => {
+    let result;
+    if (elt.hasAttribute("data-wcag-next")) {
+      result = wcag_3_contrast_light_or_dark(img, "#ffffff", "#000000", elt);
+    } else {
+      result = wcag_2_contrast_light_or_dark(img, "#ffffff", "#000000", elt);
+    }
+    // console.log(elt.getBoundingClientRect(), img.getBoundingClientRect());
+    elt.style.setProperty("--kontrasto-bg", `${result.bg_color}99`);
+    elt.style.setProperty("--kontrasto-text", result.text_color);
+  });
+};
+const applyContrastBackground = () => {
+  images.forEach((img, i) => {
+    delayAndIdle(() => applyContrastBackgroundImage(img), null, 300 + i * 300);
   });
 };
 
@@ -82,20 +87,6 @@ if (test_image_text) {
   );
 }
 
-delayAndIdle(
-  () => {
-    applyContrastBackground();
-  },
-  null,
-  100,
-);
+applyContrastBackground();
 
-window.addEventListener("resize", () => {
-  delayAndIdle(
-    () => {
-      applyContrastBackground();
-    },
-    null,
-    100,
-  );
-});
+window.addEventListener("resize", applyContrastBackground, { passive: true });
