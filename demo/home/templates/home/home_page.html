@@ -4,24 +4,15 @@
 {% load wagtailimages_tags %}
 {% load kontrasto_tags %}
 
-{% block body_class %}template-homepage{% endblock %}
-
 {% block content %}
-    <h1>{{ page.title }}</h1>
-
-    {{ page.test_image|dominant_color }}
-
-
-    <br>
-
-    {{ page.test_image|wcag_3_contrast:"#ffffff" }}
+    <h1 class="text-xl sm:text-2xl mb-8">{{ page.title }}</h1>
 
     {{ page.body|richtext }}
 
     {% with demo_text="Kontrasto" %}
-      <label for="test_image_text">
+      <label for="test_image_text" class="mb-4 block">
         <span>Image overlay text</span>
-        <input type="text" id="test_image_text" value="{{ demo_text }}">
+        <input type="text" id="test_image_text" value="{{ demo_text }}" class="border">
       </label>
 
       {% wcag_2_contrast_light_or_dark page.test_image "#ffffff" "#000000" as result %}
