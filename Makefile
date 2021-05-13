@@ -32,7 +32,7 @@ clean-pyc: ## Remove Python file artifacts.
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
 
-make build-demo:
+make build-demo: ## Builds the demo site for static hosting.
 	npm run build
 	python manage.py collectstatic --no-input
 	python manage.py migrate --no-input

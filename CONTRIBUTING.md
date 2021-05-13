@@ -34,6 +34,7 @@ make lint           # Lint the project.
 make format         # Format project files.
 make test           # Test the project.
 make clean-pyc      # Remove Python file artifacts.
+make build-demo     # Builds the demo site for static hosting.
 make sdist          # Builds package version
 make publish        # Publishes a new version to pypi.
 make publish-test   # Publishes a new version to test pypi.
