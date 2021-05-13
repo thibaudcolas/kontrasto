@@ -6,8 +6,9 @@ help: ## See what commands are available.
 
 init: clean-pyc ## Install dependencies and initialise for development.
 	pip install --upgrade pip setuptools twine wheel
-	pip install -e .
 	pip install -r requirements.txt
+	python manage.py migrate
+	python manage.py loaddata fixtures/demo_data.json
 
 lint: ## Lint the project.
 	black --check **/*.py
@@ -31,6 +32,9 @@ clean-pyc: ## Remove Python file artifacts.
 	find . -name '*.pyc' -exec rm -f {} +
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
+
+make dump-demo: ## One-off fixtures dump command to bootstrap demo sites from.
+	python manage.py dumpdata --natural-foreign --natural-primary -e contenttypes -e auth.Permission -e sessions -e home.rendition -e wagtailcore.pagelogentry --indent 2 > fixtures/demo_data.json
 
 make build-demo: ## Builds the demo site for static hosting.
 	npm run build

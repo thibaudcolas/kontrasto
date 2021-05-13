@@ -23,9 +23,16 @@ pyenv global system 3.7.8
 virtualenv .venv -p python3.7
 source ./.venv/bin/activate
 make init
+nvm use
+npm install
 ```
 
 ### Commands
+
+```bash
+python manage.py runserver
+npm run start
+```
 
 ```bash
 make help           # See what commands are available.
@@ -34,6 +41,7 @@ make lint           # Lint the project.
 make format         # Format project files.
 make test           # Test the project.
 make clean-pyc      # Remove Python file artifacts.
+make dump-demo     # One-off fixtures dump command to bootstrap demo sites from.
 make build-demo     # Builds the demo site for static hosting.
 make sdist          # Builds package version
 make publish        # Publishes a new version to pypi.
