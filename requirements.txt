@@ -1,3 +1,4 @@
+-e .
 wagtail==2.13
 django-vite==1.1.0
 black==20.8b1
