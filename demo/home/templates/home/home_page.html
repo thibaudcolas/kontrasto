@@ -9,8 +9,8 @@
     <h1 class="mb-8 text-center">
       <img src="{% static 'favicon.svg' %}" alt="" class="inline-block mb-2 sm:mb-0" width="64" height="64">
       <br class="sm:hidden">
-      <span class="align-middle inline-block bg-white border">{{ page.title }}</span><!--
-      --><span class="align-middle inline-block bg-black text-white border border-black" aria-hidden="true">{{ page.title }}</span>
+      <span class="align-middle inline-block bg-white border-2">{{ page.title }}</span><!--
+      --><span class="align-middle inline-block bg-black text-white border-2 border-black" aria-hidden="true">{{ page.title }}</span>
     </h1>
 
     <p><a href="https://github.com/thibaudcolas/kontrasto">Kontrasto</a> is a dual Python and JavaScript library which analyses instances of text over images, and transforms the text to make it more readable and have a <a href="https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html">higher contrast</a> against the background.</p>
@@ -42,7 +42,7 @@
       {% wcag_2_contrast_light_or_dark page.test_image "#ffffff" "#000000" as result %}
       {% wcag_3_contrast_light_or_dark page.test_image "#ffffff" "#000000" as result_3 %}
       <a data-demo-parent id="image-0" href="#image-0" class="grid min-w-[300px] w-[75vw] no-underline" style="--kontrasto-text:{{ result.text_color }}; --kontrasto-bg:{{ result.bg_color }}99;">
-        {% image page.test_image width-800 style="grid-column:1; grid-row: 1; width: 100%; height: auto;" %}
+        {% image page.test_image width-800 style="grid-column:1; grid-row: 1; width: 100%; height: auto;" loading="lazy" %}
         <div class="grid-1 grid grid-cols-3 grid-rows-3 gap-4 p-4 text-xl">
           {% with ''|center:9 as range %}
             {% for _ in range %}
@@ -65,7 +65,7 @@
     {% wcag_2_contrast_light_or_dark item.image "#ffffff" "#000000" as result %}
     {% wcag_3_contrast_light_or_dark item.image "#ffffff" "#000000" as result_3 %}
       <a data-demo-parent id="image-{{ forloop.counter }}" href="#image-{{ forloop.counter }}" class="grid min-w-[300px] w-[75vw] no-underline" style="--kontrasto-text:{{ result.text_color }}; --kontrasto-bg:{{ result.bg_color }}99;">
-        {% image item.image width-800 style="grid-column:1; grid-row: 1; width: 100%; height: auto;" %}
+        {% image item.image width-800 style="grid-column:1; grid-row: 1; width: 100%; height: auto;" loading="lazy" %}
         <div class="grid-1 grid grid-cols-3 grid-rows-3 gap-4 p-4 text-xl">
           {% with ''|center:9 as range %}
             {% for _ in range %}

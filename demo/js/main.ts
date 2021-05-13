@@ -45,7 +45,13 @@ const applyContrastBackgroundImage = (img: HTMLImageElement) => {
 };
 const applyContrastBackground = () => {
   images.forEach((img, i) => {
-    delayAndIdle(() => applyContrastBackgroundImage(img), 0, 300 + i * 300);
+    if (img.complete) {
+      delayAndIdle(() => applyContrastBackgroundImage(img), 0, 300 + i * 300);
+    } else {
+      img.addEventListener("load", () => {
+        delayAndIdle(() => applyContrastBackgroundImage(img), 0, 100);
+      });
+    }
   });
 };
 
