@@ -32,6 +32,15 @@ clean-pyc: ## Remove Python file artifacts.
 	find . -name '*.pyo' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
 
+make build-demo:
+	npm run build
+	python manage.py collectstatic --no-input
+	python manage.py migrate --no-input
+	python manage.py flush --no-input
+	python manage.py loaddata fixtures/demo_data.json
+	DJANGO_VITE_DEV_MODE=false python manage.py runserver &
+	wget --mirror --page-requisites http://localhost:8000/
+
 sdist: ## Builds package version
 	rm dist/* ; python setup.py sdist bdist_wheel
 

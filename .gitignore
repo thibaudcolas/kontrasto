@@ -81,7 +81,7 @@ build
 develop-eggs
 *.egg-info
 downloads
-media
+media/images
 eggs
 parts
 lib64
@@ -95,5 +95,5 @@ lib64
 # Generated files
 static
 .cache-loader
-
+localhost:8000
 *.local
