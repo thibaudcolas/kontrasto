@@ -23,6 +23,22 @@
   "bugs": {
     "url": "https://github.com/thibaudcolas/kontrasto/issues"
   },
+  "keywords": [
+    "kontrasto",
+    "color",
+    "colour",
+    "contrast",
+    "contrast-ratio",
+    "dominant colors",
+    "accessibility",
+    "a11y",
+    "wcag2",
+    "wcag3",
+    "apca",
+    "django",
+    "wagtail",
+    "numpy"
+  ],
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.23.0",
     "@typescript-eslint/parser": "^4.23.0",
