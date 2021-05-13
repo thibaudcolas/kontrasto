@@ -37,12 +37,12 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/requirements.txt', '**/setup.py') }}
           restore-keys: |
             ${{ runner.os }}-
-      - run: pip install -e . && pip install -r requirements.txt && pip install coveralls==3.0.1
+      - run: pip install -r requirements.txt coveralls==3.0.1
       - run: make test-coverage
-      # - run: coveralls || true
-      #   env:
-      #     COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: coveralls || true
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: make lint
       - run: make sdist
       - run: python manage.py makemigrations --check
