@@ -26,7 +26,9 @@ function adjustGamma(_: number): number {
  * var luminance = require('relative-luminance');
  * var black_lum = luminance([0, 0, 0]); // 0
  */
-export function relativeLuminance(rgb: [number, number, number]): number {
+export function relativeLuminance(
+  rgb: [number, number, number, number?],
+): number {
   const rsrgb = rgb[0] / 255;
   const gsrgb = rgb[1] / 255;
   const bsrgb = rgb[2] / 255;
@@ -46,7 +48,7 @@ export function relativeLuminance(rgb: [number, number, number]): number {
 // const match3or4Hex = `#?[${hexChars}]{3}[${hexChars}]?`;
 // const match6or8Hex = `#?[${hexChars}]{6}([${hexChars}]{2})?`;
 
-function hexRgb(hex: string) {
+function hexRgb(hex: string): [number, number, number, number] {
   hex = hex.replace(/^#/, "");
   let alpha = 255;
 
@@ -97,8 +99,8 @@ export function luminance(a: number, b: number): number {
  * rgb([0, 0, 0], [255, 255, 255]); // = 21
  */
 export function rgb(
-  a: [number, number, number],
-  b: [number, number, number],
+  a: [number, number, number, number?],
+  b: [number, number, number, number?],
 ): number {
   return luminance(relativeLuminance(a), relativeLuminance(b));
 }

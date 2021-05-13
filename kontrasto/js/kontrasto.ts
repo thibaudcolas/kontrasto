@@ -11,21 +11,21 @@ interface KontrastoResult {
 }
 
 interface KontrastoTarget {
-  minX?: number;
-  maxX?: number;
-  minY?: number;
-  maxY?: number;
+  minX: number;
+  maxX: number;
+  minY: number;
+  maxY: number;
 }
 
 export const wcag_2_contrast_light_or_dark = (
   image: HTMLImageElement,
   light_color: string,
   dark_color: string,
-  elt: HTMLElement = null,
+  elt: HTMLElement | null = null,
 ): KontrastoResult => {
   const colorThief = new ColorThief();
-  let filterFunction = null;
-  const target: KontrastoTarget = {};
+  let filterFunction = undefined;
+  const target: KontrastoTarget = { minX: 0, maxX: 0, minY: 0, maxY: 0 };
   if (elt) {
     const imageRect = image.getBoundingClientRect();
     const eltRect = elt.getBoundingClientRect();
@@ -64,11 +64,11 @@ export const wcag_3_contrast_light_or_dark = (
   image: HTMLImageElement,
   light_color: string,
   dark_color: string,
-  elt: HTMLElement = null,
+  elt: HTMLElement | null = null,
 ): KontrastoResult => {
   const colorThief = new ColorThief();
-  let filterFunction = null;
-  const target: KontrastoTarget = {};
+  let filterFunction = undefined;
+  const target: KontrastoTarget = { minX: 0, maxX: 0, minY: 0, maxY: 0 };
   if (elt) {
     const imageRect = image.getBoundingClientRect();
     const eltRect = elt.getBoundingClientRect();

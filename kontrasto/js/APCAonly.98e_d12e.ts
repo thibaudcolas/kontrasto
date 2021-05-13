@@ -79,7 +79,7 @@
 
 /////  DO NOT use a Y from any other method  /////
 
-function APCAcontrast(background, text) {
+function APCAcontrast(background: number, text: number) {
   let Rbg = (background & 0xff0000) >> 16,
     Gbg = (background & 0x00ff00) >> 8,
     Bbg = background & 0x0000ff;
@@ -97,7 +97,7 @@ function APCAcontrast(background, text) {
   // Essentially, 2.4 best models actual display
   // characteristics in combination with the total method
 
-  const mainTRCencode = 0.41666666666666666667; // = 1.0/mainTRC;
+  // const mainTRCencode = 0.41666666666666666667; // = 1.0/mainTRC;
 
   const Rco = 0.2126729, // sRGB Red Coefficient (from matrix)
     Gco = 0.7151522, // sRGB Green Coefficient (from matrix)
