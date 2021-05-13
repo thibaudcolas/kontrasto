@@ -29,15 +29,15 @@ INSTALLED_APPS = [
     "django_vite",
     "demo.home",
     "kontrasto",
-    "wagtail.contrib.forms",
+    # "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
-    "wagtail.embeds",
+    # "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
-    "wagtail.snippets",
-    "wagtail.documents",
+    # "wagtail.snippets",
+    # "wagtail.documents",
     "wagtail.images",
-    "wagtail.search",
+    # "wagtail.search",
     "wagtail.admin",
     "wagtail.core",
     "modelcluster",
@@ -53,7 +53,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
+    # "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -163,7 +163,7 @@ WAGTAIL_SITE_NAME = "Kontrasto"
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-BASE_URL = "http://example.com"
+BASE_URL = "https://kontrasto.netlify.app"
 
 WAGTAILIMAGES_IMAGE_MODEL = "home.CustomImage"
 WAGTAILIMAGES_FEATURE_DETECTION_ENABLED = False

@@ -182,10 +182,6 @@
       "name": "Moderators",
       "permissions": [
         ["access_admin", "wagtailadmin", "admin"],
-        ["add_document", "wagtaildocs", "document"],
-        ["change_document", "wagtaildocs", "document"],
-        ["choose_document", "wagtaildocs", "document"],
-        ["delete_document", "wagtaildocs", "document"],
         ["add_image", "wagtailimages", "image"],
         ["change_image", "wagtailimages", "image"],
         ["choose_image", "wagtailimages", "image"],
@@ -199,10 +195,6 @@
       "name": "Editors",
       "permissions": [
         ["access_admin", "wagtailadmin", "admin"],
-        ["add_document", "wagtaildocs", "document"],
-        ["change_document", "wagtaildocs", "document"],
-        ["choose_document", "wagtaildocs", "document"],
-        ["delete_document", "wagtaildocs", "document"],
         ["add_image", "wagtailimages", "image"],
         ["change_image", "wagtailimages", "image"],
         ["choose_image", "wagtailimages", "image"],
@@ -242,54 +234,6 @@
     "fields": {
       "task_ptr": 1,
       "groups": [["Moderators"]]
-    }
-  },
-  {
-    "model": "wagtailcore.groupcollectionpermission",
-    "fields": {
-      "group": ["Editors"],
-      "collection": 1,
-      "permission": ["add_document", "wagtaildocs", "document"]
-    }
-  },
-  {
-    "model": "wagtailcore.groupcollectionpermission",
-    "fields": {
-      "group": ["Moderators"],
-      "collection": 1,
-      "permission": ["add_document", "wagtaildocs", "document"]
-    }
-  },
-  {
-    "model": "wagtailcore.groupcollectionpermission",
-    "fields": {
-      "group": ["Editors"],
-      "collection": 1,
-      "permission": ["change_document", "wagtaildocs", "document"]
-    }
-  },
-  {
-    "model": "wagtailcore.groupcollectionpermission",
-    "fields": {
-      "group": ["Moderators"],
-      "collection": 1,
-      "permission": ["change_document", "wagtaildocs", "document"]
-    }
-  },
-  {
-    "model": "wagtailcore.groupcollectionpermission",
-    "fields": {
-      "group": ["Editors"],
-      "collection": 1,
-      "permission": ["choose_document", "wagtaildocs", "document"]
-    }
-  },
-  {
-    "model": "wagtailcore.groupcollectionpermission",
-    "fields": {
-      "group": ["Moderators"],
-      "collection": 1,
-      "permission": ["choose_document", "wagtaildocs", "document"]
     }
   },
   {
