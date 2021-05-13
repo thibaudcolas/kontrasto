@@ -67,8 +67,8 @@ def apca_contrast(background, text):
         + math.pow(Btxt / 255.0, mainTRC) * Bco
     )
 
-    SAPC = 0.0  # For holding raw SAPC values
-    outputContrast = 0.0  # For weighted final values
+    # SAPC = 0.0  # For holding raw SAPC values
+    # outputContrast = 0.0  # For weighted final values
 
     # ///// TUTORIAL  /////
 

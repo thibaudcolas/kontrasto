@@ -3,7 +3,7 @@
 # https://github.com/wenmin-wu/dominant-colors-py
 __author__ = "wuwenmin1991@gmail.com"
 
-import numpy as np
+import numpy as np  # lgtm [py/import-and-import-from]
 from numpy import linalg as LA
 from PIL import Image
 from collections import deque
