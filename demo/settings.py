@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+env = os.environ.copy()
+
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
@@ -171,13 +173,13 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-DJANGO_VITE_DEV_MODE = True
+DJANGO_VITE_DEV_MODE = env.get("DJANGO_VITE_DEV_MODE", "true") == "true"
 DJANGO_VITE_MANIFEST_PATH = os.path.join(
     DJANGO_VITE_ASSETS_PATH, "manifest.json"
 )
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "x*@ouu6*vj*i!_-6x*@_yklrs5f4swz2(x*+dlzdaf7@7go_d-"
+SECRET_KEY = env.get("SECRET_KEY", "not-so-secret")
 
 # SECURITY WARNING: define the correct hosts in production!
 ALLOWED_HOSTS = ["*"]

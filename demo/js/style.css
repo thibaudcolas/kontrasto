@@ -20,7 +20,9 @@ html {
 
 body {
   margin: 0 auto;
-  @apply text-xl text-gray-dark;
+  @apply text-2xl text-gray-dark;
+  background: linear-gradient(to bottom, #94c5f8 1%, #a6e6ff 70%, #b1b5ea 100%);
+  background-attachment: fixed;
 }
 
 code {
@@ -34,7 +36,7 @@ a {
 }
 
 h1 {
-  @apply text-4xl xl:text-5xl font-bold;
+  @apply text-3xl sm:text-4xl xl:text-5xl font-bold;
 }
 
 h2 {

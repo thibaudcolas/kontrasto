@@ -26,9 +26,10 @@ declare global {
 }
 
 const applyContrastBackgroundImage = (img: HTMLImageElement) => {
-  const testElt = [
-    ...img.closest("div").querySelectorAll<HTMLElement>("[data-client-only]"),
-  ];
+  const imgParent = img.closest("[data-demo-parent]");
+  const testElt = imgParent
+    ? [...imgParent.querySelectorAll<HTMLElement>("[data-client-only]")]
+    : [];
 
   testElt.forEach((elt) => {
     let result;
@@ -44,7 +45,7 @@ const applyContrastBackgroundImage = (img: HTMLImageElement) => {
 };
 const applyContrastBackground = () => {
   images.forEach((img, i) => {
-    delayAndIdle(() => applyContrastBackgroundImage(img), null, 300 + i * 300);
+    delayAndIdle(() => applyContrastBackgroundImage(img), 0, 300 + i * 300);
   });
 };
 
@@ -52,7 +53,11 @@ const applyContrastBackground = () => {
  * Delays an operation by 1-2x the given timeout, then requests
  * idle time so the operation doesn’t affect app performance.
  */
-const delayAndIdle = (callback, timeoutHandle, timeout) => {
+const delayAndIdle = (
+  callback: () => void,
+  timeoutHandle: number,
+  timeout: number,
+) => {
   if (timeoutHandle) {
     window.clearTimeout(timeoutHandle);
   }
@@ -66,7 +71,7 @@ const delayAndIdle = (callback, timeoutHandle, timeout) => {
   }, timeout);
 };
 
-let timeoutHandle;
+let timeoutHandle: number;
 
 if (test_image_text) {
   test_image_text.addEventListener(

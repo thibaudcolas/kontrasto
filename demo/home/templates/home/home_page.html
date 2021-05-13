@@ -1,13 +1,37 @@
 {% extends "base.html" %}
 
+{% load static %}
 {% load wagtailcore_tags %}
 {% load wagtailimages_tags %}
 {% load kontrasto_tags %}
 
 {% block content %}
-    <h1 class="text-xl sm:text-2xl mb-8">{{ page.title }}</h1>
+    <h1 class="mb-8 text-center">
+      <img src="{% static 'favicon.svg' %}" alt="" class="inline-block mb-2 sm:mb-0" width="64" height="64">
+      <br class="sm:hidden">
+      <span class="align-middle inline-block bg-white border">{{ page.title }}</span><!--
+      --><span class="align-middle inline-block bg-black text-white border border-black" aria-hidden="true">{{ page.title }}</span>
+    </h1>
+
+    <p><a href="https://github.com/thibaudcolas/kontrasto">Kontrasto</a> is a dual Python and JavaScript library which analyses instances of text over images, and transforms the text to make it more readable and have a <a href="https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html">higher contrast</a> against the background.</p>
+
+    <hr>
+
+    <h2 class="mt-8">Usage</h2>
+
+    <p>Install Kontrasto from:</p>
+    <ul>
+    <li><a href="https://pypi.org/project/kontrasto/">PyPI</a>. For Python projects with Pillow, as well as Django, and Wagtail.</li>
+    <li><a href="https://www.npmjs.com/package/kontrasto">npm</a>. For client-side usage.</li>
+    </ul>
+
+    <p>Using Kontrasto both server-side and client-side gives the best results: server-side processing means users will have the best possible styles as the page loads, while client-side processing can refine the result based on the final position of the text over the image.</p>
 
     {{ page.body|richtext }}
+
+    <h2 class="mt-8">Demo</h2>
+
+    <p>For each image, we display the test text across 9 areas. Each area has the text 4 times: first the result of server-side processing, with WCAG 2 and WCAG 3 contrast ratio calculations. Then the result of client-side processing, also with WCAG 2 and WCAG 3 contrast ratio calculations.</p>
 
     {% with demo_text="Kontrasto" %}
       <label for="test_image_text" class="mb-4 block">
@@ -17,12 +41,12 @@
 
       {% wcag_2_contrast_light_or_dark page.test_image "#ffffff" "#000000" as result %}
       {% wcag_3_contrast_light_or_dark page.test_image "#ffffff" "#000000" as result_3 %}
-      <div style="--kontrasto-text:{{ result.text_color }}; --kontrasto-bg:{{ result.bg_color }}99; display: grid; min-width: 300px; width: 75vw;">
+      <a data-demo-parent id="image-0" href="#image-0" class="grid min-w-[300px] w-[75vw] no-underline" style="--kontrasto-text:{{ result.text_color }}; --kontrasto-bg:{{ result.bg_color }}99;">
         {% image page.test_image width-800 style="grid-column:1; grid-row: 1; width: 100%; height: auto;" %}
         <div class="grid-1 grid grid-cols-3 grid-rows-3 gap-4 p-4 text-xl">
           {% with ''|center:9 as range %}
             {% for _ in range %}
-              <div class="grid justify-center content-center">
+              <div class="grid justify-center content-center" aria-hidden="true">
                 <p>
                   <span class="kontrasto-text-bg" data-kontrasto-text><span data-demo-text>{{ demo_text }}</span></span>
                   <span class="kontrasto-text-bg" style="--kontrasto-text:{{ result_3.text_color }}; --kontrasto-bg:{{ result_3.bg_color }}99;" data-kontrasto-text><span data-demo-text>{{ demo_text }}</span></span>
@@ -35,17 +59,17 @@
             {% endfor %}
           {% endwith %}
         </div>
-      </div>
+      </a>
 
     {% for item in page.gallery_items.all %}
     {% wcag_2_contrast_light_or_dark item.image "#ffffff" "#000000" as result %}
     {% wcag_3_contrast_light_or_dark item.image "#ffffff" "#000000" as result_3 %}
-      <div class="kontrasto--{{ result.bg_theme }}" style="--kontrasto-text:{{ result.text_color }}; --kontrasto-bg:{{ result.bg_color }}99; display: grid; min-width: 300px; width: 75vw;">
+      <a data-demo-parent id="image-{{ forloop.counter }}" href="#image-{{ forloop.counter }}" class="grid min-w-[300px] w-[75vw] no-underline" style="--kontrasto-text:{{ result.text_color }}; --kontrasto-bg:{{ result.bg_color }}99;">
         {% image item.image width-800 style="grid-column:1; grid-row: 1; width: 100%; height: auto;" %}
         <div class="grid-1 grid grid-cols-3 grid-rows-3 gap-4 p-4 text-xl">
           {% with ''|center:9 as range %}
             {% for _ in range %}
-              <div class="grid justify-center content-center">
+              <div class="grid justify-center content-center" aria-hidden="true">
                 <p>
                   <span class="kontrasto-text-bg" data-kontrasto-text><span data-demo-text>{{ demo_text }}</span></span>
                   <span class="kontrasto-text-bg" style="--kontrasto-text:{{ result_3.text_color }}; --kontrasto-bg:{{ result_3.bg_color }}99;" data-kontrasto-text><span data-demo-text>{{ demo_text }}</span></span>
@@ -58,7 +82,7 @@
             {% endfor %}
           {% endwith %}
         </div>
-      </div>
+      </a>
     {% endfor %}
 
     {% endwith %}
