@@ -152,9 +152,21 @@ class Rendition(AbstractRendition):
         unique_together = (("image", "filter_spec", "focal_point_key"),)
 ```
 
+Add kontrasto to your installed apps. In your settings module:
+
+```python
+INSTALLED_APPS = [
+    # ...
+    # other apps
+    "kontrasto",
+]
+```
+
 Then, in templates:
 
 ```html
+{% load kontrasto_tags %}
+
 {% wcag_2_contrast_light_or_dark page.test_image "#ffffff" "#000000" as result
 %} {% wcag_3_contrast_light_or_dark page.test_image "#ffffff" "#000000" as
 result_3 %}
