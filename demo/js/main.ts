@@ -12,9 +12,6 @@ const images = [...document.querySelectorAll<HTMLImageElement>("img")];
 const demoText = [
   ...document.querySelectorAll<HTMLElement>("[data-demo-text]"),
 ];
-const test_image_text = document.querySelector<HTMLInputElement>(
-  "#test_image_text",
-);
 
 declare global {
   interface Window {
@@ -76,27 +73,6 @@ const delayAndIdle = (
     }
   }, timeout);
 };
-
-let timeoutHandle: number;
-
-if (test_image_text) {
-  test_image_text.addEventListener(
-    "keyup",
-    (e: Event) => {
-      const target = e.target as HTMLInputElement;
-
-      timeoutHandle = delayAndIdle(
-        () => {
-          demoText.forEach((elt) => (elt.innerText = target.value));
-          applyContrastBackground();
-        },
-        timeoutHandle,
-        100,
-      );
-    },
-    { passive: true },
-  );
-}
 
 applyContrastBackground();
 
