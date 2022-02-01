@@ -15,7 +15,7 @@ from kontrasto.willow_operations import pillow_dominant
 
 from modelcluster.fields import ParentalKey
 
-# https://docs.wagtail.io/en/stable/advanced_topics/images/custom_image_model.html
+# https://docs.wagtail.org/en/stable/advanced_topics/images/custom_image_model.html
 
 
 class CustomImage(AbstractImage):

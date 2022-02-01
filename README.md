@@ -103,7 +103,7 @@ In Wagtail, using Kontrasto is much simpler:
 - The result of dominant color extraction is cached, greatly improving performance.
 - The above methods are directly available as template tags.
 
-At least for now, this does mean using Kontrasto requires adding a field to a [custom image model](https://docs.wagtail.io/en/stable/advanced_topics/images/custom_image_model.html):
+At least for now, this does mean using Kontrasto requires adding a field to a [custom image model](https://docs.wagtail.org/en/stable/advanced_topics/images/custom_image_model.html):
 
 ```python
 from wagtail.images.models import (
